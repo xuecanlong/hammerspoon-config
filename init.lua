@@ -19,6 +19,8 @@ require "weather.weather"
 require "headphone.headphone"
 -- 消息推送  推送任意消息提醒
 require "speaker.speaker"
+-- 输入法自动切换
+require "keylayout.keylayout"
 
 -- require "statuslets.statuslets"
 
