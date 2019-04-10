@@ -1,5 +1,5 @@
 local cmdArr = {
-    "cd /Users/hongwenlong/sh/ && ./up.sh"
+    "cd /Users/hongwenlong/sh/ && ./up.sh > up_log"
 }
 
 function shell(cmd)
@@ -8,6 +8,7 @@ end
 
 function runAutoScripts()
     for key, cmd in ipairs(cmdArr) do
+        print(cmd)
         shell(cmd)
     end
 end
