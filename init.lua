@@ -11,7 +11,6 @@ require "wifi.wifi"
 require "window.window"
 -- 剪切板历史记录  记录剪贴板历史,点击某一项再重新复制。
 require "clipboard.clipboard"
-require "statuslets.statuslets"
 -- 音量调节快捷键  当我使用外接键盘时,自定义快捷键 cmd + up/down 调节系统音量
 require "volume.volume" 
 -- 菜单栏显示最近几天天气情况  请求免费的天气 API,在深圳这个多雨的城市里提醒我别忘记带伞。
@@ -21,6 +20,7 @@ require "headphone.headphone"
 -- 消息推送  推送任意消息提醒
 require "speaker.speaker"
 
+-- require "statuslets.statuslets"
 
 -- Private use
 if (hs.host.localizedName() == '洪文龙的MacBook Pro') then
