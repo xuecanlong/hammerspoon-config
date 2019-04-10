@@ -8,7 +8,6 @@ end
 
 -- Handle cursor focus and application's screen manage.
 function applicationWatcher(appName, eventType, appObject)
-    print(appName)
     if (eventType == hs.application.watcher.activated) then
         if (appName == "iTerm2") then
             English()
