@@ -1,18 +1,36 @@
 local cmdArr = {
-    "cd /Users/hongwenlong/sh/ && ./up.sh > up_log"
+    {"up", hs.timer.hours(6), "cd /Users/hongwenlong/sh/ && ./up.sh > up_log"}
 }
+local menuData = {}
 
-function shell(cmd)
-    result = hs.osascript.applescript(string.format('do shell script "%s"', cmd))
+local menubar = hs.menubar.new()
+
+function updateMenubar()
+    menubar:setTooltip("AutoScript Info")
+   menubar:setMenu(menuData)
 end
 
-function runAutoScripts()
-    for key, cmd in ipairs(cmdArr) do
-        print(cmd)
-        shell(cmd)
+function getData(cmd)
+    local Now=os.time()
+    local newTime=os.date("*t", Now + cmd[2])
+    local runTime = string.format('%d-%02d-%02d %02d:%02d:%02d',newTime.year,newTime.month,newTime.day,newTime.hour,newTime.min,newTime.sec)
+    for i,v in ipairs(menuData) do
+        if v.task_id == cmd[1] then
+            table.remove(menuData, i)
+        end
     end
+    titlestr = string.format("Task: %s Time: %s", cmd[1], runTime)
+    table.insert(menuData, {task_id=cmd[1], title = titlestr})
 end
 
-
-timer = hs.timer.new(hs.timer.hours(6), runAutoScripts)
-timer:start()
+menubar:setTitle('⌛')
+for key, cmd in ipairs(cmdArr) do
+    local timer = hs.timer.new(cmd[2], function () 
+        result = hs.osascript.applescript(string.format('do shell script "%s"', cmd[3])) 
+        getData(cmd)
+        updateMenubar()
+    end)
+    timer:start()
+    getData(cmd)
+end
+updateMenubar()
