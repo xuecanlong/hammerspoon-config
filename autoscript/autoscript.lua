@@ -14,5 +14,5 @@ function runAutoScripts()
 end
 
 
-timer = hs.timer.new(3600, runAutoScripts)
+timer = hs.timer.new(hs.timer.hours(6), runAutoScripts)
 timer:start()
