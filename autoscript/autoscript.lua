@@ -5,6 +5,8 @@ local menuData = {}
 
 local menubar = hs.menubar.new()
 
+local timerData = {}
+
 function updateMenubar()
     menubar:setTooltip("AutoScript Info")
    menubar:setMenu(menuData)
@@ -31,6 +33,7 @@ for key, cmd in ipairs(cmdArr) do
         updateMenubar()
     end)
     timer:start()
+    table.insert(menuData, {task_id = cmd[1], timer = timer})
     getData(cmd)
 end
 updateMenubar()
